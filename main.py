@@ -22,9 +22,10 @@ def scale_image(self):
 
 class Building(QWidget):
     def __init__(self, id):
+        print("lala")
         super().__init__()
         self.main = QVBoxLayout()
-        self.setStyleSheet('.Building {background-image: url(text.png);}')
+
         query = sqlite3.connect("ennorath.sqlite")
         cursor = query.cursor()
         building = cursor.execute("SELECT * FROM `buildings` WHERE `id` = ?", (id,)).fetchall()[0]
@@ -49,6 +50,7 @@ class Building(QWidget):
         self.main.addLayout(self.row)
         self.main.addLayout(self.info)
         self.setLayout(self.main)
+
 
 
 class Buildings(QWidget):
@@ -447,7 +449,7 @@ class Fraction(QWidget):
         cursor = query.cursor()
 
         heroes = cursor.execute("SELECT `image_heroes` FROM `fractions` WHERE `id` = ?", (id,)).fetchall()[0][0]
-        print(heroes)
+
         self.heroes_image = QLabel()
         self.heroes_image.setPixmap(QPixmap(f"backgrounds/{heroes}.png"))
         self.heroes_btn = QPushButton("Герои")
